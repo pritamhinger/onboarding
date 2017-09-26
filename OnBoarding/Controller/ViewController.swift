@@ -12,12 +12,19 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
     let cellId = "CellId"
     
+    let pages: [Page] = {
+        let firstPage = Page(title: "Welcome Onboard", message: "Share your basic details in case you need some help.", imageName: "page1")
+        let secondPage = Page(title: "Connect", message: "Connect with other members. A friend in need is friend indeed.", imageName: "page1")
+        let thirdPage = Page(title: "Share", message: "Share information in case someone needs your help. Share to Care", imageName: "page1")
+        return [firstPage, secondPage, thirdPage]
+    }()
+    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .red
+        cv.backgroundColor = .white
         cv.isPagingEnabled = true
         cv.delegate = self
         cv.dataSource = self
@@ -36,12 +43,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 // MARK: - UICollectionViewDataSource Implementation
 extension ViewController{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return pages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! PageCell
         
+        let page = pages[indexPath.row]
+        cell.page = page
         return cell
     }
 }
