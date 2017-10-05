@@ -10,8 +10,10 @@ import UIKit
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
+    // MARK: - Constants
     let cellId = "CellId"
     
+    // MARK: - Instance Properties
     let pages: [Page] = {
         let firstPage = Page(title: "Welcome Onboard", message: "Share your basic details in case you need some help.", imageName: "page1")
         let secondPage = Page(title: "Connect", message: "Connect with other members. A friend in need is friend indeed.", imageName: "page1")
@@ -19,6 +21,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return [firstPage, secondPage, thirdPage]
     }()
     
+    // MARK: - UIControls Instance Properties
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -31,11 +34,42 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return cv
     }()
     
+    let pageControl: UIPageControl = {
+        let pc = UIPageControl()
+        pc.pageIndicatorTintColor = .lightGray
+        pc.currentPageIndicatorTintColor = UIColor(red: 247/255, green: 154/255, blue: 27/255, alpha: 1)
+        pc.numberOfPages = 3
+        return pc
+    }()
+    
+    let skipButton : UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Skip", for: .normal)
+        button.setTitleColor(UIColor(red: 247/255, green: 154/255, blue: 27/255, alpha: 1) , for: .normal)
+        return button
+    }()
+    
+    let nextButton : UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Next", for: .normal)
+        button.setTitleColor(UIColor(red: 247/255, green: 154/255, blue: 27/255, alpha: 1) , for: .normal)
+        return button
+    }()
+    
+    // MARK: - View Controller Lifecycle Events
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.addSubview(collectionView)
-        collectionView.anchorToTop(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
+        view.addSubview(pageControl)
+        view.addSubview(skipButton)
+        view.addSubview(nextButton)
+        
+        _ = pageControl.anchor(nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 30)
+        _ = skipButton.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, topConstant: 16, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 50)
+        _ = nextButton.anchor(view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, topConstant: 16, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 50)
+        collectionView.anchorToTop(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
+        
         collectionView.register(PageCell.self, forCellWithReuseIdentifier: cellId)
     }
 }
