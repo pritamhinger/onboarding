@@ -73,13 +73,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		4860B8221F88EA1900C22479 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
 		48B6CDFC1F7965C400A62F44 = {
 			isa = PBXGroup;
 			children = (
@@ -99,7 +92,6 @@
 		48B6CE071F7965C400A62F44 /* OnBoarding */ = {
 			isa = PBXGroup;
 			children = (
-				4860B8221F88EA1900C22479 /* Protocols */,
 				48B6CE141F7965C400A62F44 /* Info.plist */,
 				485341111F7A0A8000D06B4F /* Controller */,
 				48B6CE1A1F79697D00A62F44 /* Extensions */,

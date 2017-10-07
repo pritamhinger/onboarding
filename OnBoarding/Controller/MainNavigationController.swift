@@ -33,7 +33,7 @@ class MainNavigationController: UINavigationController {
     
     // MARK: - Fileprivate Methods
     func isLoggedIn() -> Bool {
-        return true
+        return false
     }
 }
 

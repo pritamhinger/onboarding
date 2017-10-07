@@ -10,6 +10,9 @@ import UIKit
 
 class LoginCell: UICollectionViewCell {
     
+    // MARK: - Instance Variable
+    weak var loginControllerDelegate: LoginViewControllerDelegate?
+    
     // MARK: - UIControls Instance Properties
     let logoImageView: UIImageView = {
         let image = UIImage(named: "Logo")
@@ -36,13 +39,14 @@ class LoginCell: UICollectionViewCell {
         return tf
     }()
     
-    let loginButton: UIButton = {
+    lazy var loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .orange
         button.setTitle("Log in", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 2
         button.layer.masksToBounds = true
+        button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return button
     }()
     
@@ -69,6 +73,11 @@ class LoginCell: UICollectionViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("Not Implemented")
+    }
+    
+    // MARK: - Private methods
+    @objc func handleLogin() {
+        loginControllerDelegate?.finishLoggingIn()
     }
 }
 

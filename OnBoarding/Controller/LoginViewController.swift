@@ -8,6 +8,9 @@
 
 import UIKit
 
+protocol LoginViewControllerDelegate: class {
+    func finishLoggingIn()
+}
 class LoginViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     // MARK: - Constants
@@ -145,18 +148,17 @@ class LoginViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     // MARK: - Fileprivate methods
-    
-    func observeKeyboardNotifications() {
+    fileprivate func observeKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: .UIKeyboardWillHide, object: nil)
     }
     
-    func registerCells() {
+    fileprivate func registerCells() {
         collectionView.register(PageCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.register(LoginCell.self, forCellWithReuseIdentifier: loginCellId)
     }
     
-    func moveControlConstraintOffScreen() {
+    fileprivate func moveControlConstraintOffScreen() {
         pageControlBottomAnchor?.constant = 40
         skipButtonTopAnchor?.constant = -40
         nextButtonTopAnchor?.constant = -40
@@ -186,6 +188,17 @@ class LoginViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
 }
 
+// MARK: - LoginViewControllerDelegate Implementation
+extension LoginViewController: LoginViewControllerDelegate{
+    func finishLoggingIn() {
+        let rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        
+        guard let mainnavigationController = rootViewController as? MainNavigationController else { return }
+        mainnavigationController.viewControllers = [HomeController()]
+        dismiss(animated: true, completion: nil)
+    }
+}
+
 // MARK: - UICollectionViewDataSource Implementation
 extension LoginViewController{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -196,6 +209,7 @@ extension LoginViewController{
         
         if indexPath.item == pages.count{
             let loginCell = collectionView.dequeueReusableCell(withReuseIdentifier: loginCellId, for: indexPath) as! LoginCell
+            loginCell.loginControllerDelegate = self
             return loginCell
         }
         
