@@ -51,6 +51,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let button = UIButton(type: .system)
         button.setTitle("Skip", for: .normal)
         button.setTitleColor(UIColor(red: 247/255, green: 154/255, blue: 27/255, alpha: 1) , for: .normal)
+        button.addTarget(self, action: #selector(skip), for: .touchUpInside)
         return button
     }()
     
@@ -58,6 +59,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let button = UIButton(type: .system)
         button.setTitle("Next", for: .normal)
         button.setTitleColor(UIColor(red: 247/255, green: 154/255, blue: 27/255, alpha: 1) , for: .normal)
+        button.addTarget(self, action: #selector(nextPage), for: .touchUpInside)
         return button
     }()
     
@@ -66,6 +68,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         super.viewDidLoad()
         
         observeKeyboardNotifications()
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboardOnTap)))
         
         view.addSubview(collectionView)
         view.addSubview(pageControl)
@@ -88,6 +91,36 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     // MARK: - IBActions
+    @objc func nextPage() {
+        // Last page check
+        if(pageControl.currentPage == pages.count){
+            return
+        }
+        
+        if(pageControl.currentPage == pages.count - 1){
+            moveControlConstraintOffScreen()
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        }
+        
+        let indexPath = IndexPath(item: pageControl.currentPage + 1, section: 0)
+        pageControl.currentPage += 1
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
+    
+    @objc func skip() {
+        pageControl.currentPage = pages.count - 1
+        nextPage()
+    }
+    
+    // MARK: - Tap Gestures
+    
+    @objc func hideKeyboardOnTap() {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.view.endEditing(true)
+        }, completion: nil)
+    }
     
     // MARK: - UIScrollView Delegate Methods
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -98,9 +131,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         pageControl.currentPage = pageNumber
         
         if(pageNumber == pages.count){
-            pageControlBottomAnchor?.constant = 40
-            skipButtonTopAnchor?.constant = -40
-            nextButtonTopAnchor?.constant = -40
+            moveControlConstraintOffScreen()
         }
         else{
             pageControlBottomAnchor?.constant = 0
@@ -125,7 +156,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         collectionView.register(LoginCell.self, forCellWithReuseIdentifier: loginCellId)
     }
     
-    // MARK: Private methods
+    func moveControlConstraintOffScreen() {
+        pageControlBottomAnchor?.constant = 40
+        skipButtonTopAnchor?.constant = -40
+        nextButtonTopAnchor?.constant = -40
+    }
+    
+    // MARK: - Private methods
     @objc func keyboardShow() {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.view.frame = CGRect(x: 0, y: -100, width: self.view.frame.width, height: self.view.frame.height)
@@ -133,6 +170,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     @objc func keyboardHide(){
+        print("Hiding Keyboard")
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
         }, completion: nil)

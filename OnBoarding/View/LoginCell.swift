@@ -46,7 +46,7 @@ class LoginCell: UICollectionViewCell {
         return button
     }()
     
-    // MARK: Initializers
+    // MARK: -Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         
