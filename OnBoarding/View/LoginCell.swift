@@ -10,6 +10,7 @@ import UIKit
 
 class LoginCell: UICollectionViewCell {
     
+    // MARK: - UIControls Instance Properties
     let logoImageView: UIImageView = {
         let image = UIImage(named: "Logo")
         let imageView = UIImageView(image: image)
@@ -45,14 +46,17 @@ class LoginCell: UICollectionViewCell {
         return button
     }()
     
+    // MARK: Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        // Adding controls on the UI
         addSubview(logoImageView)
         addSubview(emailTextField)
         addSubview(passwordTextField)
         addSubview(loginButton)
         
+        // Autolayouting controls
         _ = logoImageView.anchor(centerYAnchor, left: nil, bottom: nil, right: nil, topConstant: -200, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 160, heightConstant: 160)
         logoImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
@@ -68,12 +72,13 @@ class LoginCell: UICollectionViewCell {
     }
 }
 
+// MARK: - Specialized Class with Left and right padding
 class LeftPaddedTextField: UITextField {
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return CGRect(x: bounds.origin.x + 10, y: bounds.origin.y, width: bounds.width + 10, height: bounds.height)
+        return CGRect(x: bounds.origin.x + 10, y: bounds.origin.y, width: bounds.width - 10, height: bounds.height)
     }
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return CGRect(x: bounds.origin.x + 10, y: bounds.origin.y, width: bounds.width + 10, height: bounds.height)
+        return CGRect(x: bounds.origin.x + 10, y: bounds.origin.y, width: bounds.width - 10, height: bounds.height)
     }
 }

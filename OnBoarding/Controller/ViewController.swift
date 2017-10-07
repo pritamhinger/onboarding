@@ -80,6 +80,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         registerCells()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(NSNotification.Name.UIKeyboardWillShow)
+        NotificationCenter.default.removeObserver(NSNotification.Name.UIKeyboardDidShow)
+    }
+    
     // MARK: - IBActions
     
     // MARK: - UIScrollView Delegate Methods
