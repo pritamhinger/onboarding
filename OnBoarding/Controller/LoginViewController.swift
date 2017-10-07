@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class LoginViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     // MARK: - Constants
     let cellId = "CellId"
@@ -170,7 +170,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     @objc func keyboardHide(){
-        print("Hiding Keyboard")
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
         }, completion: nil)
@@ -188,7 +187,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 }
 
 // MARK: - UICollectionViewDataSource Implementation
-extension ViewController{
+extension LoginViewController{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return pages.count + 1
     }
@@ -209,7 +208,7 @@ extension ViewController{
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout Implementation
-extension ViewController{
+extension LoginViewController{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: view.frame.height)
     }
