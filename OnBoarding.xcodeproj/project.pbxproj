@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		485341141F7A0ACD00D06B4F /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485341131F7A0ACD00D06B4F /* Page.swift */; };
+		486B169E1F88B75B00555BBC /* LoginCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486B169D1F88B75B00555BBC /* LoginCell.swift */; };
 		48B6CE091F7965C400A62F44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B6CE081F7965C400A62F44 /* AppDelegate.swift */; };
 		48B6CE0B1F7965C400A62F44 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B6CE0A1F7965C400A62F44 /* ViewController.swift */; };
 		48B6CE0E1F7965C400A62F44 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48B6CE0C1F7965C400A62F44 /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		485341131F7A0ACD00D06B4F /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
+		486B169D1F88B75B00555BBC /* LoginCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCell.swift; sourceTree = "<group>"; };
 		48B6CE051F7965C400A62F44 /* OnBoarding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnBoarding.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48B6CE081F7965C400A62F44 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		48B6CE0A1F7965C400A62F44 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				48B6CE1E1F79782800A62F44 /* PageCell.swift */,
+				486B169D1F88B75B00555BBC /* LoginCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -190,6 +193,7 @@
 				48B6CE1F1F79782800A62F44 /* PageCell.swift in Sources */,
 				48B6CE1C1F7969A100A62F44 /* UIViewExtenstion.swift in Sources */,
 				485341141F7A0ACD00D06B4F /* Page.swift in Sources */,
+				486B169E1F88B75B00555BBC /* LoginCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
