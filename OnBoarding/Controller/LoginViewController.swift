@@ -194,7 +194,9 @@ extension LoginViewController: LoginViewControllerDelegate{
         let rootViewController = UIApplication.shared.keyWindow?.rootViewController
         
         guard let mainnavigationController = rootViewController as? MainNavigationController else { return }
-        mainnavigationController.viewControllers = [HomeController()]
+        mainnavigationController.viewControllers = [HomeViewController()]
+        
+        UserDefaults.standard.setIsLoggedIn(value: true)
         dismiss(animated: true, completion: nil)
     }
 }

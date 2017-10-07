@@ -16,7 +16,7 @@ class MainNavigationController: UINavigationController {
         
         if isLoggedIn(){
             print("User is logged in")
-            let homeController = HomeController()
+            let homeController = HomeViewController()
             viewControllers = [homeController]
         }
         else{
@@ -33,17 +33,6 @@ class MainNavigationController: UINavigationController {
     
     // MARK: - Fileprivate Methods
     func isLoggedIn() -> Bool {
-        return false
-    }
-}
-
-
-class HomeController: UIViewController{
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .yellow
-        
-        navigationItem.title = "Welcome, User"
-        
+        return UserDefaults.standard.isLoggedIn()
     }
 }
